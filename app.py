@@ -7,9 +7,12 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import *
+from flask_cors import CORS
 import os
 
 app=Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 load_dotenv()
 
@@ -33,6 +36,7 @@ llm = ChatGoogleGenerativeAI(
     google_api_key=os.environ["GEMINI_API_KEY"],
     max_output_tokens=1000
 )
+
 
 prompt=ChatPromptTemplate.from_messages(
   [
