@@ -83,7 +83,7 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/": {"origins": ""}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 load_dotenv()
 
@@ -142,6 +142,7 @@ def home():
 def ask_question():
     data = request.get_json()
     question = data.get("question", "").strip()
+    print(f"Received question: {question}")
 
     if not question:
         return jsonify({"error": "Question is required"}), 400
